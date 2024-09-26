@@ -1,0 +1,5 @@
+### GET books
+GET localhost:9000/books
+
+### GET orders
+GET localhost:9000/orders

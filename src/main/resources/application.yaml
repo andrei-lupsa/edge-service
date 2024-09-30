@@ -20,6 +20,7 @@ spring:
           max-idle-time: 15s
           max-life-time: 60s
       default-filters:
+        - SaveSession
         - name: Retry
           args:
             retries: 3
@@ -61,6 +62,11 @@ spring:
       port: 6379
       connect-timeout: 3s
       timeout: 1s
+  session:
+    redis:
+      namespace: polar:edge
+    timeout: 10m
+
 
 resilience4j:
   circuitbreaker:

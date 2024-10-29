@@ -3,3 +3,24 @@ GET localhost:9000/books
 
 ### GET orders
 GET localhost:9000/orders
+
+### Create book
+POST localhost:9000/books
+Content-Type: application/json
+
+{
+  "isbn": "1234567897",
+  "title": "All I don't know about the Arctic",
+  "author": "Jon Snow",
+  "price": 9.9,
+  "publisher": "Polarsophia"
+}
+
+### Post an order
+POST localhost:9000/orders
+Content-Type: application/json
+
+{
+  "isbn": "1234567897",
+  "quantity": 3
+}

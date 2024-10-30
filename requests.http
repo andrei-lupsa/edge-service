@@ -1,11 +1,11 @@
 ### GET books
-GET localhost:9000/books
+GET {{host}}/books
 
 ### GET orders
-GET localhost:9000/orders
+GET {{host}}/orders
 
 ### Create book
-POST localhost:9000/books
+POST {{host}}/books
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### Post an order
-POST localhost:9000/orders
+POST {{host}}/orders
 Content-Type: application/json
 
 {

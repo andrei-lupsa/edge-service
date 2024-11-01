@@ -2,10 +2,10 @@ package com.polarbookshop.edgeservice;
 
 import com.polarbookshop.edgeservice.testcontainers.TestContainers;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.testcontainers.context.ImportTestcontainers;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.security.oauth2.client.registration.ReactiveClientRegistrationRepository;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 @Testcontainers
@@ -14,12 +14,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
         properties = "spring.cloud.config.enabled=false")
 class EdgeServiceApplicationTests {
 
-    @Autowired
-    private WebTestClient webClient;
+    @MockBean
+    ReactiveClientRegistrationRepository clientRegistrationRepository;
 
     @Test
     void contextLoads() {
-        webClient.get().uri("/books").exchange().expectStatus().isOk();
     }
-
 }

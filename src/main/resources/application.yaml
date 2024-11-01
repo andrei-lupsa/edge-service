@@ -12,20 +12,32 @@ spring:
     timeout-per-shutdown-phase: 15s
   config:
     import: "optional:configserver:"
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: edge-service
+            client-secret: polar-keycloak-secret
+            scope:
+              - openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8080/realms/PolarBookshop
   cloud:
     config:
       uri: http://localhost:8888
-      request-connect-timeout: 5000
-      request-read-timeout: 5000
-      fail-fast: true
+      request-connect-timeout: 5000 # 5s
+      request-read-timeout: 5000 # 5s
+      fail-fast: false # In production, set to true
       retry:
         max-attempts: 6
-        initial-interval: 1000
-        max-interval: 2000
+        initial-interval: 1000 # 1s
+        max-interval: 2000 # 2s
         multiplier: 1.1
     gateway:
       httpclient:
-        connect-timeout: 2000
+        connect-timeout: 2000 # 2s
         response-timeout: 5s
         pool:
           type: elastic
@@ -33,10 +45,16 @@ spring:
           max-life-time: 60s
       default-filters:
         - SaveSession
+        - name: RequestRateLimiter
+          args:
+            redis-rate-limiter:
+              replenishRate: 10
+              burstCapacity: 20
+              requestedTokens: 1
         - name: Retry
           args:
             retries: 3
-            method: GET
+            methods: GET
             series: SERVER_ERROR
             exceptions: java.io.IOException, java.util.concurrent.TimeoutException
             backoff:
@@ -44,13 +62,11 @@ spring:
               maxBackOff: 500ms
               factor: 2
               basedOnPreviousValue: false
-        - name: RequestRateLimiter
-          args:
-            redis-rate-limiter:
-              replenishRate: 10
-              burstCapacity: 20
-              requestedTokens: 1
       routes:
+        - id: spa-route
+          uri: ${SPA_URL:http://localhost:9004}
+          predicates:
+            - Path=/,/*.css,/*.js,/favicon.ico
         - id: catalog-route
           uri: ${CATALOG_SERVICE_URL:http://localhost:9001}/books
           predicates:

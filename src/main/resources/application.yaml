@@ -23,7 +23,7 @@ spring:
               - openid
         provider:
           keycloak:
-            issuer-uri: http://localhost:8080/realms/PolarBookshop
+            issuer-uri: http://polar-keycloak:8080/realms/PolarBookshop
   cloud:
     config:
       uri: http://localhost:8888

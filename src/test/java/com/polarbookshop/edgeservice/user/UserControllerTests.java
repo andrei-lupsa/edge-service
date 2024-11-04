@@ -58,6 +58,7 @@ class UserControllerTests {
                             expectedUser.firstName());
                     builder.claim(StandardClaimNames.FAMILY_NAME,
                             expectedUser.lastName());
+                    builder.claim("roles", expectedUser.roles());
                 });
     }
 }

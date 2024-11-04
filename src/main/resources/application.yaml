@@ -21,6 +21,7 @@ spring:
             client-secret: polar-keycloak-secret
             scope:
               - openid
+#              - roles
         provider:
           keycloak:
             issuer-uri: http://polar-keycloak:8080/realms/PolarBookshop
@@ -45,6 +46,7 @@ spring:
           max-life-time: 60s
       default-filters:
         - SaveSession
+        - TokenRelay
         - name: RequestRateLimiter
           args:
             redis-rate-limiter:

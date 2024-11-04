@@ -18,6 +18,10 @@ spec:
         - name: edge-service
           image: edge-service
           imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "sh", "-c", "sleep 5" ]
           ports:
             - containerPort: 9000
           env:
@@ -25,13 +29,15 @@ spec:
               value: "50"
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
-            - name: SPRING_CLOUD_CONFIG_URI
-              value: http://config-service
             - name: CATALOG_SERVICE_URL
               value: http://catalog-service
             - name: ORDER_SERVICE_URL
               value: http://order-service
-          lifecycle:
-            preStop:
-              exec:
-                command: [ "sh", "-c", "sleep 5" ]
+            - name: SPA_URL
+              value: http://polar-ui
+            - name: SPRING_CLOUD_CONFIG_URI
+              value: http://config-service
+            - name: SPRING_DATA_REDIS_HOST
+              value: polar-redis
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER_URI
+              value: http://polar-keycloak/realms/PolarBookshop

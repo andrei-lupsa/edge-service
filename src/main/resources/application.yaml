@@ -129,3 +129,8 @@ management:
       show-components: always
       probes:
         enabled: true #alway enable readiness and liveness probes, not just for Kubernetes
+      group:
+        readiness:
+          include:
+            - readinessState
+            - redis

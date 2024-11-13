@@ -9,3 +9,7 @@ concurrency: acceptance
 jobs:
   acceptance-stage:
     uses: andrei-lupsa/polar-deployment/.github/workflows/acceptance-stage.yml@master
+    permissions:
+      contents: read
+      packages: write
+      security-events: write

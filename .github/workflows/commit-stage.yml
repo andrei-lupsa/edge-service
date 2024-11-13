@@ -6,3 +6,7 @@ jobs:
     uses: andrei-lupsa/polar-deployment/.github/workflows/commit-stage.yml@master
     with:
       image_name: andrei-lupsa/edge-service
+    permissions:
+      contents: read
+      packages: write
+      security-events: write

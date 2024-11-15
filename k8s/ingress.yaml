@@ -15,13 +15,13 @@ spec:
                 name: edge-service
                 port:
                   number: 80
-    - host: polar-keycloak
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: polar-keycloak
-                port:
-                  number: 80
+#    - host: polar-keycloak
+#      http:
+#        paths:
+#          - path: /
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: polar-keycloak
+#                port:
+#                  number: 80

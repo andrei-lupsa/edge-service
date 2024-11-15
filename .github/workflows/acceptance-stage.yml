@@ -14,6 +14,6 @@ jobs:
   acceptance-stage:
     uses: andrei-lupsa/polar-deployment/.github/workflows/acceptance-stage.yml@master
     with:
-      app_repo: catalog-service
+      app_repo: edge-service
     secrets:
       DISPATCH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
